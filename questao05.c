@@ -1,24 +1,36 @@
 #include <stdio.h>
+#include <string.h>
 
-int main(){
-    float altura, peso_ideal;
-    char sexo;
+struct professor {
+    char nome[50];
+    int siape;
+};
 
-    printf("Digite o valor da sua altura: ");
-    scanf("%f", &altura);
+struct disciplina {
+    char nomeDisciplina[50];
+    int codigo;
+    int creditos;
+    struct professor docente; // Estrutura aninhada
+};
 
-    printf("Digite qual seu sexo: ");
-    scanf(" %c", &sexo);
+int main() {
+    struct disciplina logicaProgramacao;
 
-    if (sexo == 'h'){
-        peso_ideal = (72.7 * altura) - 58;
-    }
-    else{
-        peso_ideal = (62.1 * altura)- 44.7;
+    strcpy(logicaProgramacao.nomeDisciplina, "Lógica de Programação");
+    logicaProgramacao.codigo = 450523;
+    logicaProgramacao.creditos = 4;
 
-    }
+    strcpy(logicaProgramacao.docente.nome, "Prof. Daniel Ferreira");
+    logicaProgramacao.docente.siape = 123456;
 
-    printf("O calculo do peso ideal é: %.2f\n", peso_ideal);
+    printf("\n--- Informações da Disciplina ---\n");
+    printf("Nome da Disciplina: %s\n", logicaProgramacao.nomeDisciplina);
+    printf("Código: %d\n", logicaProgramacao.codigo);
+    printf("Créditos: %d\n", logicaProgramacao.creditos);
+
+    printf("\n--- Professor Responsável ---\n");
+    printf("Nome do Professor: %s\n", logicaProgramacao.docente.nome);
+    printf("SIAPE: %d\n", logicaProgramacao.docente.siape);
+
     return 0;
-
 }
